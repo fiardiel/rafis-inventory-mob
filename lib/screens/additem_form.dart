@@ -59,8 +59,8 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        hintText: "Price",
-                        labelText: "Price",
+                        hintText: "Amount",
+                        labelText: "Amount",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -119,7 +119,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: const Text('Product successfully saved'),
+                                  title: const Text('Itemadd successfully saved'),
                                   content: SingleChildScrollView(
                                     child: Column(
                                       crossAxisAlignment:
