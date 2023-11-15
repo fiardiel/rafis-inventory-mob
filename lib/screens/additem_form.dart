@@ -119,14 +119,14 @@ class _ItemFormPageState extends State<ItemFormPage> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: const Text('Itemadd successfully saved'),
+                                  title: const Text('Item addition successfully saved'),
                                   content: SingleChildScrollView(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text('Name: $_name'),
-                                        Text('Price: $_amount'),
+                                        Text('Amount: $_amount'),
                                         Text('Description: $_description')
                                       ],
                                     ),
