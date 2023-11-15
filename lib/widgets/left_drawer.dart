@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rafis_inventory_mobile/screens/menu.dart';
 import 'package:rafis_inventory_mobile/screens/additem_form.dart';
+import 'package:rafis_inventory_mobile/screens/view_item.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -59,6 +60,18 @@ class LeftDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const ItemFormPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.checklist),
+            title: const Text('View Items'),
+            // redirect to ShopFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ViewItemPage(),
                   ));
             },
           ),

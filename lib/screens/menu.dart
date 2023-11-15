@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rafis_inventory_mobile/widgets/left_drawer.dart';
-import 'package:rafis_inventory_mobile/widgets/item_card.dart';
+import 'package:rafis_inventory_mobile/widgets/home_widgets.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
