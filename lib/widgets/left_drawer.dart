@@ -18,7 +18,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Rafi\'s Inventory',
+                  'Shopping List',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -28,7 +28,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                    "Trusted, safe, reliable, all in here",
+                    "Write all your inventory needs here!",
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.white,
@@ -59,20 +59,19 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ItemFormPage(),
+                    builder: (context) => const InventoryFormPage(),
                   ));
             },
           ),
           ListTile(
-            leading: const Icon(Icons.checklist),
-            title: const Text('View Items'),
-            // redirect to ShopFormPage
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Item List'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ViewItemPage(),
-                  ));
+                // Route menu to product page
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ItemPage()),
+                );
             },
           ),
         ],

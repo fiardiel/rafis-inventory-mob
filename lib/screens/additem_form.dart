@@ -1,22 +1,28 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rafis_inventory_mobile/widgets/left_drawer.dart';
-import 'package:rafis_inventory_mobile/screens/view_item.dart';
-import 'package:rafis_inventory_mobile/models/product.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:rafis_inventory_mobile/screens/menu.dart';
 
-class ItemFormPage extends StatefulWidget {
-  const ItemFormPage({super.key});
+class InventoryFormPage extends StatefulWidget {
+  const InventoryFormPage({super.key});
 
   @override
-  State<ItemFormPage> createState() => _ItemFormPageState();
+  State<InventoryFormPage> createState() => _InventoryFormPageState();
 }
 
-class _ItemFormPageState extends State<ItemFormPage> {
+class _InventoryFormPageState extends State<InventoryFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
   int _amount = 0;
   String _description = "";
+  String _category = "";
+  int _damage = 0;
+
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -105,6 +111,55 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Category",
+                  labelText: "Category",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _category = value!;
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Category cannot be empty!";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Damage",
+                  labelText: "Damage",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _damage = int.parse(value!);
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Damage cannot be empty!";
+                  }
+                  if (int.tryParse(value) == null) {
+                    return "Damage must be a number!";
+                  }
+                  return null;
+                },
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -113,37 +168,35 @@ class _ItemFormPageState extends State<ItemFormPage> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.indigo),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          products.add(Product(_name, _amount, _description));
-                          return AlertDialog(
-                            title:
-                                const Text('Item addition successfully saved'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Name: $_name'),
-                                  Text('Amount: $_amount'),
-                                  Text('Description: $_description')
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                      _formKey.currentState!.reset();
+                      // Send request to Django and wait for the response
+                      final response = await request.postJson(
+                          "http://127.0.0.1:8000/create-flutter/",
+                          jsonEncode(<String, String>{
+                            'name': _name,
+                            'amount': _amount.toString(),
+                            'description': _description,
+                            'category': _category,
+                            'damage': _damage.toString()
+                            // TODO: Adjust the fields with your Django model
+                          }));
+                      if (response['status'] == 'success') {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("New item has saved successfully!"),
+                        ));
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content:
+                              Text("Something went wrong, please try again."),
+                        ));
+                      }
                     }
                   },
                   child: const Text(

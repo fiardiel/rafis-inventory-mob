@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:rafis_inventory_mobile/screens/additem_form.dart';
 import 'package:rafis_inventory_mobile/screens/view_item.dart';
+import 'package:rafis_inventory_mobile/screens/additem_form.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:rafis_inventory_mobile/screens/login.dart';
 
-class Item {
+class HomeItem {
   final String name;
   final IconData icon;
   final Color color;
-  Item(this.name, this.icon, this.color);
+  HomeItem(this.name, this.icon, this.color);
 }
 
-class ItemCard extends StatelessWidget {
-  final Item item;
+class HomeCard extends StatelessWidget {
+  final HomeItem item;
 
-  const ItemCard(this.item, {Key? key}); // Constructor
+  const HomeCard(this.item, {Key? key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: item.color,
       child: InkWell(
         // Area responsive to touch
-        onTap: () {
+        onTap: () async {
           // Show SnackBar when clicked
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -32,15 +36,31 @@ class ItemCard extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ItemFormPage(),
+                  builder: (context) => const InventoryFormPage(),
                 ));
           } else if (item.name == "View Items") {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ViewItemPage(),
-                )
+              context,
+              MaterialPageRoute(builder: (context) => const ItemPage()),
             );
+          } else if (item.name == "Logout") {
+            final response =
+                await request.logout("http://127.0.0.1:8000/auth/logout/");
+            String message = response["message"];
+            if (response['status']) {
+              String uname = response["username"];
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message Good bye, $uname."),
+              ));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message"),
+              ));
+            }
           }
         },
         child: Container(

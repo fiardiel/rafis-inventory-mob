@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+// import drawer widget
 import 'package:rafis_inventory_mobile/widgets/left_drawer.dart';
 import 'package:rafis_inventory_mobile/widgets/home_widgets.dart';
+
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final List<Item> items = [
-    Item("View Items", Icons.checklist, Colors.indigo.shade400),
-    Item("Add Item", Icons.add_shopping_cart, Colors.blue.shade400),
-    Item("Logout", Icons.logout, Colors.red.shade400),
+  final List<HomeItem> items = [
+    HomeItem("View Items", Icons.checklist, Colors.indigo.shade400),
+    HomeItem("Add Item", Icons.add_shopping_cart, Colors.blue.shade400),
+    HomeItem("Logout", Icons.logout, Colors.red.shade400),
   ];
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -25,7 +27,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Rafi\'s Inventory',
+          'Shopping List',
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
@@ -42,7 +44,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Text widget to display text with center alignment and appropriate style
                 child: Text(
-                  'Inventory', // Text indicating the shop name
+                  'PBP Shop', // Text indicating the shop name
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -59,9 +61,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((Item item) {
+                children: items.map((HomeItem item) {
                   // Iteration for each item
-                  return ItemCard(item);
+                  return HomeCard(item);
                 }).toList(),
               ),
             ],
