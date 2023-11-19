@@ -179,7 +179,6 @@ class _InventoryFormPageState extends State<InventoryFormPage> {
                             'description': _description,
                             'category': _category,
                             'damage': _damage.toString()
-                            // TODO: Adjust the fields with your Django model
                           }));
                       if (response['status'] == 'success') {
                         ScaffoldMessenger.of(context)

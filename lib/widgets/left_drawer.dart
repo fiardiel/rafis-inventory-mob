@@ -18,7 +18,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Shopping List',
+                  'Rafi\'s Inventory',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -28,7 +28,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                    "Write all your inventory needs here!",
+                    "Reliable, trustworthy, and safe.",
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.white,

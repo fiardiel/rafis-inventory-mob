@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Shopping List',
+          'Inventory',
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
@@ -44,7 +44,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Text widget to display text with center alignment and appropriate style
                 child: Text(
-                  'PBP Shop', // Text indicating the shop name
+                  'Rafi\'s Inventory', // Text indicating the shop name
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,

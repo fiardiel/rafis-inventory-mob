@@ -44,23 +44,24 @@ class HomeCard extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const ItemPage()),
             );
           } else if (item.name == "Logout") {
-            final response =
-                await request.logout("http://127.0.0.1:8000/auth/logout/");
-            String message = response["message"];
-            if (response['status']) {
-              String uname = response["username"];
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message Good bye, $uname."),
-              ));
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message"),
-              ));
-            }
+              final response =
+                  await request.logout("http://127.0.0.1:8000/auth/logout/");
+              String message = response["message"];
+              if (response['status']) {
+                String uname = response["username"];
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Good bye, $uname."),
+                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              } 
+              else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message"),
+                ));
+              }
           }
         },
         child: Container(
