@@ -8,22 +8,22 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-    const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
-    @override
-    Widget build(BuildContext context) {
-        return Provider(
-            create: (_) {
-                CookieRequest request = CookieRequest();
-                return request;
-            },
-            child: MaterialApp(
-                title: 'Flutter App',
-                theme: ThemeData(
-                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-                    useMaterial3: true,
-                ),
-                home: MyHomePage()),
-        );
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+          title: 'Flutter App',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+            useMaterial3: true,
+          ),
+          home: MyHomePage()),
+    );
+  }
 }

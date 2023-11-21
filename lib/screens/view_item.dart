@@ -14,7 +14,6 @@ class ItemPage extends StatefulWidget {
 
 class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchProduct() async {
-    // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
     var url = Uri.parse('http://127.0.0.1:8000/json/');
     var response = await http.get(
       url,
@@ -39,6 +38,8 @@ class _ItemPageState extends State<ItemPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Items'),
+          backgroundColor: Colors.indigo,
+          foregroundColor: Colors.white,
         ),
         drawer: const LeftDrawer(),
         body: FutureBuilder(
@@ -66,9 +67,8 @@ class _ItemPageState extends State<ItemPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ItemDetailPage(item: snapshot.data![index])
-                                )
-                            );
+                                    builder: (context) => ItemDetailPage(
+                                        item: snapshot.data![index])));
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -86,7 +86,7 @@ class _ItemPageState extends State<ItemPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                const Text("Click for details!"),
+                                Text("${snapshot.data![index].fields.description}"),
                                 const SizedBox(height: 10),
                               ],
                             ),

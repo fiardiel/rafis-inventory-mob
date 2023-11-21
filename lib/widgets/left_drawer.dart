@@ -28,13 +28,13 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                    "Reliable, trustworthy, and safe.",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    textAlign: TextAlign.center,
+                  "Reliable, trustworthy, and safe.",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
@@ -67,11 +67,11 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.shopping_basket),
             title: const Text('Item List'),
             onTap: () {
-                // Route menu to product page
-                Navigator.push(
+              // Route menu to product page
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ItemPage()),
-                );
+              );
             },
           ),
         ],

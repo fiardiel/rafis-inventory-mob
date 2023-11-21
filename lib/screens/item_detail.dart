@@ -11,8 +11,9 @@ class ItemDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Item Details'),
-        automaticallyImplyLeading: false, // Remove back button
+        title: const Text('Item Details'),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: Padding(
@@ -22,25 +23,25 @@ class ItemDetailPage extends StatelessWidget {
           children: [
             Text(
               item.fields.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text("Amount: ${item.fields.amount}"),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text("Description: ${item.fields.description}"),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text("Category: ${item.fields.category}"),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text("Damage: ${item.fields.damage}"),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context); // Navigate back to the item list page
               },
-              child: Text('Back to Item List'),
+              child: const Text('Back to Item List'),
             ),
           ],
         ),
